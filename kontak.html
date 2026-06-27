@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak & Info - ARFELYA | Toko Photocard K-Pop</title>
+  <meta name="description" content="Hubungi ARFELYA atau lihat detail informasi tim pengembang website tugas sekolah kami di sini.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ===== BASE STYLES & GRADIENT BACKGROUND ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; background-color: #0f0a1e; color: #da75bf; line-height: 1.6; padding-bottom: 60px; }
+    body::before {
+      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(ellipse at 20% 50%, rgba(155, 89, 217, 0.07) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(230, 100, 180, 0.06) 0%, transparent 50%);
+      z-index: -1; pointer-events: none;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: rgba(15, 10, 30, 0.85); backdrop-filter: blur(20px);
+      position: sticky; top: 0; z-index: 999;
+      border-bottom: 1px solid rgba(155, 89, 217, 0.25);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 5%; }
+    .nav-logo { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #c084fc, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding: 16px 0; }
+    nav ul { list-style-type: none; display: flex; }
+    nav ul li a { display: block; color: #c4b5e8; text-decoration: none; padding: 20px 22px; font-size: 13px; font-weight: 600; text-transform: uppercase; transition: all 0.3s; position: relative; }
+    nav ul li a::after { content: ''; position: absolute; bottom: 10px; left: 22px; right: 22px; height: 2px; background: linear-gradient(90deg, #c084fc, #f472b6); transform: scaleX(0); transition: transform 0.3s; border-radius: 2px; }
+    nav ul li a:hover, nav ul li a.active { color: #f0e6ff; }
+    nav ul li a:hover::after, nav ul li a.active::after { transform: scaleX(1); }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      text-align: center; padding: 80px 8% 60px;
+      background: linear-gradient(180deg, rgba(147,51,234,0.08) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(147, 51, 234, 0.1);
+    }
+    .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(30px, 5vw, 50px); background: linear-gradient(135deg, #f0e6ff 0%, #c084fc 50%, #f472b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+    .page-header p { color: #8b7aaa; font-size: 15px; }
+
+    section { padding: 70px 8%; }
+    h2.section-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: #f0e6ff; text-align: center; margin-bottom: 8px; }
+    .divider { width: 60px; height: 3px; background: linear-gradient(to right, #9333ea, #ec4899); margin: 0 auto 50px; border-radius: 2px; }
+
+    /* ===== GRID PANELS ===== */
+    .contact-container { display: flex; gap: 40px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+    .card-panel {
+      flex: 1; min-width: 320px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 40px; border-radius: 24px;
+      border: 1px solid rgba(192, 132, 252, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    .panel-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: #c084fc; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    
+    .info-list { list-style: none; }
+    .info-list li { margin-bottom: 16px; font-size: 14px; color: #9d8fc2; }
+    .info-list strong { color: #e2d4f7; display: block; margin-bottom: 2px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    /* Team specific styling */
+    .team-list { list-style: none; counter-reset: team-counter; }
+    .team-list li {
+      counter-increment: team-counter; font-size: 14px; color: #9d8fc2;
+      padding: 10px 14px; background: rgba(147, 51, 234, 0.06); 
+      border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(147, 51, 234, 0.1);
+    }
+    .team-list li::before { content: counter(team-counter) ". "; color: #f472b6; font-weight: bold; }
+    .team-subtitle { font-size: 13px; color: #6b5d88; font-style: italic; margin-bottom: 15px; display: block; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #070410; color: #6b5d88; padding: 40px 8% 20px; text-align: center; font-size: 13px; border-top: 1px solid rgba(147, 51, 234, 0.1); margin-top: 60px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">✦ ARFELYA</div>
+    <ul>
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="menu.html">Koleksi</a></li>
+      <li><a href="reservasi.html">Pemesanan</a></li>
+      <li><a href="kontak.html" class="active">Kontak & Info</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Hubungi Kami</h1>
+  <p>Butuh bantuan atau info ketersediaan photocard? Layanan CS kami siap membantu.</p>
+</div>
+
+<section>
+  <div class="contact-container">
+    
+    <div class="card-panel">
+      <div class="panel-title">📞 Informasi Toko</div>
+      <ul class="info-list">
+        <li>
+          <strong>WhatsApp</strong>
+          0898-8703-818 (Fast Response jam 09.00 - 19.00)
+        </li>
+        <li>
+          <strong>Email Support</strong>
+          amourawry@gmail.com
+        </li>
+        <li>
+          <strong>Instagram Resmi</strong>
+          @arfelya.official
+        </li>
+        <li>
+          <strong>Shopee & Tokopedia Marketplace</strong>
+          Arfelya Photocard Shop
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-panel">
+      <div class="panel-title">✦ Tim Pengembang Website</div>
+      <span class="team-subtitle">Dibuat oleh Kelompok 5 untuk memenuhi tugas mata kuliah PKTI 2C</span>
+      <ul class="team-list">
+        <li><strong>ANDI RESTU ISLAMI ASMARA</strong> (10225173)</li>
+        <li><strong>ELMA MULIA PUTRI</strong> (10225523)</li>
+         <li><strong>FEBRIANA DWIPUSPA NINGRUM</strong> (10225595)</li>
+        <li><strong>JAUZI TYAS CANDRALAKSMI</strong> (10225748)</li>
+        <li><strong>RAHAYU NUR SYIFA</strong> (11225408)</li>
+        <li><strong>SIMANJUNTAK, NATALIA</strong> (11225672)</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 ARFELYA — Photocard K-Pop Original & Terpercaya ✦
+</footer>
+
+</body>
+</html>

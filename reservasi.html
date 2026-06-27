@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemesanan - ARFELYA | Toko Photocard K-Pop</title>
+  <meta name="description" content="Pesan photocard K-Pop favoritmu di ARFELYA. Isi form pemesanan dan kami akan segera konfirmasi ordermu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ===== RESET & BASE STYLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; background-color: #0f0a1e; color: #e8e0f5; padding-bottom: 60px; }
+    body::before {
+      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(ellipse at 20% 50%, rgba(155, 89, 217, 0.07) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 20%, rgba(230, 100, 180, 0.06) 0%, transparent 50%);
+      z-index: -1; pointer-events: none;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      background: rgba(15, 10, 30, 0.85); backdrop-filter: blur(20px);
+      position: sticky; top: 0; z-index: 999;
+      border-bottom: 1px solid rgba(155, 89, 217, 0.25);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 5%; }
+    .nav-logo { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #c084fc, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding: 16px 0; }
+    nav ul { list-style-type: none; display: flex; }
+    nav ul li a { display: block; color: #c4b5e8; text-decoration: none; padding: 20px 22px; font-size: 13px; font-weight: 600; text-transform: uppercase; transition: all 0.3s; position: relative; }
+    nav ul li a::after { content: ''; position: absolute; bottom: 10px; left: 22px; right: 22px; height: 2px; background: linear-gradient(90deg, #c084fc, #f472b6); transform: scaleX(0); transition: transform 0.3s; border-radius: 2px; }
+    nav ul li a:hover, nav ul li a.active { color: #f0e6ff; }
+    nav ul li a:hover::after, nav ul li a.active::after { transform: scaleX(1); }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      text-align: center; padding: 60px 8% 40px;
+      background: linear-gradient(180deg, rgba(147,51,234,0.08) 0%, transparent 100%);
+    }
+    .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(30px, 5vw, 48px); background: linear-gradient(135deg, #f0e6ff 0%, #c084fc 50%, #f472b6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+    .page-header p { color: #8b7aaa; font-size: 15px; max-width: 650px; margin: 0 auto; }
+
+    /* ===== FORM SECTION & CONTAINERS ===== */
+    .form-section { padding: 20px 5% 80px; }
+    .form-container {
+      max-width: 680px; margin: 0 auto;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 45px; border-radius: 24px;
+      border: 1px solid rgba(192, 132, 252, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+    
+    .form-group { margin-bottom: 25px; }
+    .form-group label { display: block; font-size: 14px; font-weight: 600; color: #c4b5e8; margin-bottom: 8px; letter-spacing: 0.3px; }
+    
+    /* Input Controls */
+    .form-control {
+      width: 100%; padding: 14px 18px; font-family: 'Outfit', sans-serif;
+      font-size: 15px; color: #f0e6ff; background: rgba(15, 10, 30, 0.6);
+      border: 1px solid rgba(147, 51, 234, 0.3); border-radius: 12px;
+      outline: none; transition: all 0.3s ease;
+    }
+    .form-control:focus { border-color: #c084fc; box-shadow: 0 0 12px rgba(192, 132, 252, 0.25); background: rgba(15, 10, 30, 0.8); }
+    .form-control::placeholder { color: #5c4e78; }
+    
+    textarea.form-control { resize: vertical; }
+
+    /* Custom Radio & Checkbox Groups */
+    .radio-group, .check-group { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+    .radio-option, .check-option { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #9d8fc2; cursor: pointer; user-select: none; }
+    .radio-option input, .check-option input { accent-color: #c084fc; transform: scale(1.15); cursor: pointer; }
+
+    .form-note { font-size: 13px; color: #6b5d88; font-style: italic; margin-top: 8px; }
+
+    /* ===== INFO BOX METODE PEMBAYARAN ===== */
+    .payment-info-box {
+      margin-top: 20px;
+      padding: 18px;
+      background: rgba(147, 51, 234, 0.12);
+      border-left: 4px solid #f472b6;
+      border-radius: 8px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    .payment-info-box p { font-size: 14px; color: #e2d4f7; margin-bottom: 5px; }
+    .payment-info-box strong { color: #f472b6; }
+
+    /* ===== BUTTONS ===== */
+    .btn-submit {
+      width: 100%; padding: 16px; font-family: 'Outfit', sans-serif;
+      font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      color: #fff; background: linear-gradient(135deg, #7c3aed, #db2777);
+      border: none; border-radius: 50px; cursor: pointer;
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3); transition: all 0.3s ease;
+      margin-top: 15px;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(124, 58, 237, 0.45); filter: brightness(1.08); }
+    
+    .btn-reset {
+      width: 100%; padding: 12px; font-family: 'Outfit', sans-serif;
+      font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      color: #6b5d88; background: transparent;
+      border: 1px solid rgba(107, 93, 136, 0.3); border-radius: 50px; cursor: pointer;
+      transition: all 0.3s ease; margin-top: 12px;
+    }
+    .btn-reset:hover { color: #f472b6; border-color: rgba(244, 114, 182, 0.4); background: rgba(244, 114, 182, 0.02); }
+
+    /* ===== HIDDEN CLASS ===== */
+    .hidden { display: none; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #070410; color: #6b5d88; padding: 40px 8% 20px; text-align: center; font-size: 13px; border-top: 1px solid rgba(147, 51, 234, 0.1); margin-top: 40px; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">✦ ARFELYAe</div>
+    <ul>
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="menu.html">Koleksi</a></li>
+      <li><a href="reservasi.html" class="active">Pemesanan</a></li>
+      <li><a href="kontak.html">Kontak & Info</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1 id="page-title">Formulir Pemesanan</h1>
+  <p id="page-desc">Lengkapi detail di bawah ini untuk mengamankan photocard impianmu. Klaim item favoritmu sebelum kehabisan!</p>
+</div>
+
+<section class="form-section">
+  <div class="form-container">
+    
+    <!-- TAHAP 1: FORM DATA PESANAN -->
+    <form id="form-pesanan" onsubmit="tampilkanPembayaran(event)">
+      
+      <div class="form-group">
+        <label for="nama">Nama Lengkap Kolektor *</label>
+        <input type="text" id="nama" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+      </div>
+
+      <div class="form-group">
+        <label for="whatsapp">Nomor WhatsApp Aktif *</label>
+        <input type="tel" id="whatsapp" class="form-control" placeholder="Contoh: 0812345678xx" required>
+        <p class="form-note">* Digunakan untuk mengirimkan info pengiriman dan nomor resi</p>
+      </div>
+
+      <div class="form-group">
+        <label for="alamat">Alamat Pengiriman Lengkap *</label>
+        <textarea id="alamat" class="form-control" rows="3" placeholder="Nama Jalan, RT/RW, Kecamatan, Kabupaten/Kota, Kode Pos" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="detail-pesanan">Spesifikasi Photocard (Member, Era, dll.) *</label>
+        <textarea id="detail-pesanan" class="form-control" rows="3" placeholder="Contoh: Jungkook - BTS Proof era, atau Karina - aespa My World" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Jenis Paket *</label>
+        <div class="radio-group">
+          <label class="radio-option"><input type="radio" name="paket" value="satuan" checked> Satuan (Sesuai List Katalog)</label>
+          <label class="radio-option"><input type="radio" name="paket" value="bundle"> Bundle Set Era / Member</label>
+          <label class="radio-option"><input type="radio" name="paket" value="mystery"> Mystery Box Untung Gede</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Layanan Tambahan Extra Safe</label>
+        <div class="check-group">
+          <label class="check-option"><input type="checkbox" name="tambahan" value="toploader"> Tambah Ultra-Pro Toploader (+Rp 3.000)</label>
+          <label class="check-option"><input type="checkbox" name="tambahan" value="wrapping"> Gift Wrapping / Kartu Ucapan Custom (+Rp 5.000)</label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">✦ Menuju ke Pembayaran</button>
+      <button type="reset" class="btn-reset">Reset Form</button>
+    </form>
+
+    <!-- TAHAP 2: FORM METODE PEMBAYARAN -->
+    <form id="form-pembayaran" class="hidden" onsubmit="selesaiPembayaran(event)">
+      
+      <div class="form-group">
+        <label>Pilih Metode Pembayaran *</label>
+        <div class="radio-group" style="margin-top: 15px;">
+          <label class="radio-option">
+            
+                    <input type="radio" name="metode" value="dana" onchange="updateDetailPembayaran()"> 🪙 DANA
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="metode" value="spay" onchange="updateDetailPembayaran()"> 🧡 ShopeePay
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="metode" value="tf_bank" onchange="updateDetailPembayaran()"> 🏦 Transfer Bank Mandiri
+          </label>
+        </div>
+
+        <!-- AREA DINAMIS NOMOR REKENING / NO TELP / ATAS NAMA -->
+        <div id="payment-details-box" class="payment-info-box">
+          <!-- Default isi saat QRIS aktif -->
+          <p><strong>Sistem QRIS:</strong> Kode QR dinamis akan digenerate otomatis setelah tombol di bawah ditekan.</p>
+        </div>
+
+        <p class="form-note" style="margin-top: 15px;">* Silakan transfer sesuai instruksi di atas, lalu tekan submit untuk memproses pesanan.</p>
+      </div>
+
+      <button type="submit" class="btn-submit">✦ Selesaikan Pembayaran</button>
+      <button type="button" class="btn-reset" onclick="kembaliKePesanan()">Kembali</button>
+    </form>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 ARFELYA — Photocard K-Pop Original & Terpercaya ✦
+</footer>
+
+<!-- ===== INTERACTIVE JAVASCRIPT SYSTEM ===== -->
+<script>
+  // Fungsi ketika tombol 'Menuju ke Pembayaran' diklik
+  function tampilkanPembayaran(event) {
+    event.preventDefault();
+    document.getElementById('form-pesanan').classList.add('hidden');
+    document.getElementById('form-pembayaran').classList.remove('hidden');
+    document.getElementById('page-title').innerText = "Metode Pembayaran";
+    document.getElementById('page-desc').innerText = "Silakan transfer ke detail akun di bawah ini untuk menyelesaikan pesananmu.";
+    updateDetailPembayaran(); // Memastikan info box terisi dengan benar saat dibuka
+    window.scrollTo({ top: 200, behavior: 'smooth' });
+  }
+
+  // Fungsi untuk memantau perubahan pilihan metode & mencantumkan data rekening
+  function updateDetailPembayaran() {
+    const metodeTerpilih = document.querySelector('input[name="metode"]:checked').value;
+    const infoBox = document.getElementById('payment-details-box');
+    
+    
+     
+    if (metodeTerpilih === 'dana') {
+      infoBox.innerHTML = `
+        <p><strong>Metode:</strong> E-Wallet DANA</p>
+        <p><strong>Nomor Telepon:</strong> 0895-1252-3841</p>
+        <p><strong>Atas Nama:</strong> Simanjuntak Natalia</p>
+      `;
+    } 
+    else if (metodeTerpilih === 'spay') {
+      infoBox.innerHTML = `
+        <p><strong>Metode:</strong> ShopeePay (SPay)</p>
+        <p><strong>Nomor Telepon:</strong> 0812-9822-2164</p>
+        <p><strong>Atas Nama:</strong> Andi Restu Islami Asmara</p>
+      `;
+    } 
+    else if (metodeTerpilih === 'tf_bank') {
+      infoBox.innerHTML = `
+        <p><strong>Bank Tujuan:</strong> Bank Mandiri </p>
+        <p><strong>Nomor Rekening:</strong> 166-000-484-4973</p>
+        <p><strong>Atas Nama:</strong> RAHAYU NUR SYIFA</p>
+      `;
+    }
+  }
+
+  // Fungsi untuk kembali dari form pembayaran ke form pesanan data
+  function kembaliKePesanan() {
+    document.getElementById('form-pembayaran').classList.add('hidden');
+    document.getElementById('form-pesanan').classList.remove('hidden');
+    document.getElementById('page-title').innerText = "Formulir Pemesanan";
+    document.getElementById('page-desc').innerText = "Lengkapi detail di bawah ini untuk mengamankan photocard impianmu.";
+  }
+
+  // Fungsi akhir saat metode pembayaran disubmit (kembali ke beranda)
+  function selesaiPembayaran(event) {
+    event.preventDefault();
+    const pilihanMetode = document.querySelector('input[name="metode"]:checked').value.toUpperCase();
+    
+    alert("Konfirmasi pembayaran via " + pilihanMetode + " berhasil diterima!\nAdmin akan memvalidasi pesanan Anda segera. Kembali ke beranda...");
+    
+    // Redirect otomatis kembali ke halaman beranda (index.html)
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
